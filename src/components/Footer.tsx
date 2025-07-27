@@ -1,0 +1,202 @@
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Separator } from "@/components/ui/separator";
+import { 
+  Facebook, 
+  Twitter, 
+  Instagram, 
+  Linkedin, 
+  Youtube,
+  Mail,
+  Phone,
+  MapPin,
+  ArrowRight
+} from "lucide-react";
+import { Link } from "react-router-dom";
+
+const Footer = () => {
+  const currentYear = new Date().getFullYear();
+
+  const footerLinks = {
+    services: [
+      { name: "Brand Design", href: "#" },
+      { name: "Digital Marketing", href: "#" },
+      { name: "Web Development", href: "#" },
+      { name: "Content Strategy", href: "#" },
+      { name: "Video Production", href: "#" },
+      { name: "App Development", href: "#" }
+    ],
+    company: [
+      { name: "About Us", href: "/about" },
+      { name: "Our Work", href: "#" },
+      { name: "Careers", href: "#" },
+      { name: "Blog", href: "#" },
+      { name: "Press", href: "#" },
+      { name: "Contact", href: "#contact" }
+    ],
+    resources: [
+      { name: "E-Book", href: "/ebook" },
+      { name: "Courses", href: "/courses" },
+      { name: "Case Studies", href: "#" },
+      { name: "Templates", href: "#" },
+      { name: "Tools", href: "#" },
+      { name: "Support", href: "#" }
+    ]
+  };
+
+  const socialLinks = [
+    { icon: Facebook, href: "#", label: "Facebook" },
+    { icon: Twitter, href: "#", label: "Twitter" },
+    { icon: Instagram, href: "#", label: "Instagram" },
+    { icon: Linkedin, href: "#", label: "LinkedIn" },
+    { icon: Youtube, href: "#", label: "YouTube" }
+  ];
+
+  return (
+    <footer className="bg-muted/20 border-t border-border/50">
+      {/* Newsletter Section */}
+      <div className="container mx-auto px-4 py-16">
+        <div className="card-3d p-8 mb-16">
+          <div className="text-center max-w-2xl mx-auto">
+            <h3 className="text-3xl font-bold mb-4">
+              Stay Updated with <span className="gradient-text">Latest Trends</span>
+            </h3>
+            <p className="text-muted-foreground mb-6">
+              Get weekly insights, tips, and exclusive content delivered to your inbox.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
+              <Input 
+                placeholder="Enter your email" 
+                className="bg-background/50 border-border/50 flex-1"
+              />
+              <Button className="btn-gradient">
+                Subscribe
+                <ArrowRight size={16} className="ml-2" />
+              </Button>
+            </div>
+          </div>
+        </div>
+
+        {/* Main Footer Content */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 mb-12">
+          {/* Company Info */}
+          <div className="lg:col-span-2">
+            <div className="flex items-center space-x-2 mb-6">
+              <div className="w-10 h-10 bg-gradient-primary rounded-xl flex items-center justify-center">
+                <span className="text-xl font-bold text-primary-foreground">S</span>
+              </div>
+              <span className="text-xl font-bold gradient-text">Spark Craft Studio</span>
+            </div>
+            <p className="text-muted-foreground mb-6 max-w-md">
+              Transforming businesses through innovative design, strategic marketing, 
+              and cutting-edge technology solutions.
+            </p>
+            
+            {/* Contact Info */}
+            <div className="space-y-3 mb-6">
+              <div className="flex items-center space-x-3">
+                <Mail size={16} className="text-primary" />
+                <span className="text-sm">hello@sparkcraftstudio.com</span>
+              </div>
+              <div className="flex items-center space-x-3">
+                <Phone size={16} className="text-primary" />
+                <span className="text-sm">+1 (555) 123-4567</span>
+              </div>
+              <div className="flex items-center space-x-3">
+                <MapPin size={16} className="text-primary" />
+                <span className="text-sm">123 Creative Street, Design City, DC 12345</span>
+              </div>
+            </div>
+
+            {/* Social Links */}
+            <div className="flex space-x-4">
+              {socialLinks.map((social, index) => (
+                <a
+                  key={index}
+                  href={social.href}
+                  aria-label={social.label}
+                  className="w-10 h-10 bg-muted/50 hover:bg-primary/20 rounded-lg flex items-center justify-center transition-colors group"
+                >
+                  <social.icon size={18} className="text-muted-foreground group-hover:text-primary" />
+                </a>
+              ))}
+            </div>
+          </div>
+
+          {/* Services */}
+          <div>
+            <h4 className="font-semibold mb-4">Services</h4>
+            <ul className="space-y-3">
+              {footerLinks.services.map((link, index) => (
+                <li key={index}>
+                  <a 
+                    href={link.href}
+                    className="text-sm text-muted-foreground hover:text-primary transition-colors"
+                  >
+                    {link.name}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Company */}
+          <div>
+            <h4 className="font-semibold mb-4">Company</h4>
+            <ul className="space-y-3">
+              {footerLinks.company.map((link, index) => (
+                <li key={index}>
+                  <Link 
+                    to={link.href}
+                    className="text-sm text-muted-foreground hover:text-primary transition-colors"
+                  >
+                    {link.name}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Resources */}
+          <div>
+            <h4 className="font-semibold mb-4">Resources</h4>
+            <ul className="space-y-3">
+              {footerLinks.resources.map((link, index) => (
+                <li key={index}>
+                  <Link 
+                    to={link.href}
+                    className="text-sm text-muted-foreground hover:text-primary transition-colors"
+                  >
+                    {link.name}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+
+        <Separator className="bg-border/50 mb-8" />
+
+        {/* Bottom Footer */}
+        <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
+          <div className="text-sm text-muted-foreground">
+            © {currentYear} Spark Craft Studio. All rights reserved.
+          </div>
+          <div className="flex space-x-6 text-sm">
+            <a href="#" className="text-muted-foreground hover:text-primary transition-colors">
+              Privacy Policy
+            </a>
+            <a href="#" className="text-muted-foreground hover:text-primary transition-colors">
+              Terms of Service
+            </a>
+            <a href="#" className="text-muted-foreground hover:text-primary transition-colors">
+              Cookie Policy
+            </a>
+          </div>
+        </div>
+      </div>
+    </footer>
+  );
+};
+
+export default Footer;
