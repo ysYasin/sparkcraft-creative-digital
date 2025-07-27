@@ -7,6 +7,10 @@ import Index from "./pages/Index";
 import About from "./pages/About";
 import Ebook from "./pages/Ebook";
 import Courses from "./pages/Courses";
+import DigitalMarketing from "./pages/DigitalMarketing";
+import WebDevelopment from "./pages/WebDevelopment";
+import ContentStrategy from "./pages/ContentStrategy";
+import VideoProduction from "./pages/VideoProduction";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -22,6 +26,10 @@ const App = () => (
           <Route path="/about" element={<About />} />
           <Route path="/ebook" element={<Ebook />} />
           <Route path="/courses" element={<Courses />} />
+          <Route path="/digital-marketing" element={<DigitalMarketing />} />
+          <Route path="/web-development" element={<WebDevelopment />} />
+          <Route path="/content-strategy" element={<ContentStrategy />} />
+          <Route path="/video-production" element={<VideoProduction />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

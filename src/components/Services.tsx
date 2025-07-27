@@ -14,46 +14,36 @@ import {
 const Services = () => {
   const services = [
     {
-      icon: Palette,
-      title: "Brand Design",
-      description: "Create stunning visual identities that capture your brand essence and resonate with your audience.",
-      features: ["Logo Design", "Brand Guidelines", "Visual Identity", "Print Materials"],
-      price: "Starting at $2,500"
-    },
-    {
       icon: BarChart3,
       title: "Digital Marketing",
       description: "Data-driven marketing strategies that boost your online presence and drive measurable results.",
       features: ["SEO Optimization", "Social Media", "PPC Campaigns", "Analytics"],
-      price: "Starting at $1,800"
+      price: "Starting at $1,800",
+      slug: "digital-marketing"
     },
     {
       icon: Globe,
       title: "Web Development",
       description: "Modern, responsive websites that convert visitors into customers and grow your business.",
       features: ["Custom Development", "E-commerce", "CMS Integration", "Mobile Responsive"],
-      price: "Starting at $3,500"
+      price: "Starting at $3,500",
+      slug: "web-development"
     },
     {
       icon: Megaphone,
       title: "Content Strategy",
       description: "Engaging content that tells your story and builds meaningful connections with your audience.",
       features: ["Content Planning", "Copywriting", "Blog Strategy", "Email Campaigns"],
-      price: "Starting at $1,200"
+      price: "Starting at $1,200",
+      slug: "content-strategy"
     },
     {
       icon: Video,
       title: "Video Production",
       description: "Professional video content that captures attention and drives engagement across all platforms.",
       features: ["Commercial Videos", "Social Content", "Animation", "Live Streaming"],
-      price: "Starting at $2,000"
-    },
-    {
-      icon: Smartphone,
-      title: "App Development",
-      description: "Native and cross-platform mobile applications that deliver exceptional user experiences.",
-      features: ["iOS & Android", "UI/UX Design", "Backend Integration", "App Store Optimization"],
-      price: "Starting at $5,000"
+      price: "Starting at $2,000",
+      slug: "video-production"
     }
   ];
 
@@ -101,7 +91,12 @@ const Services = () => {
                 </ul>
                 <div className="flex items-center justify-between">
                   <span className="text-lg font-semibold gradient-text">{service.price}</span>
-                  <Button size="sm" variant="outline" className="group-hover:bg-primary group-hover:text-primary-foreground transition-colors">
+                  <Button 
+                    size="sm" 
+                    variant="outline" 
+                    className="group-hover:bg-primary group-hover:text-primary-foreground transition-colors"
+                    onClick={() => window.location.href = `/${service.slug}`}
+                  >
                     Learn More
                     <ArrowRight size={16} className="ml-1" />
                   </Button>
