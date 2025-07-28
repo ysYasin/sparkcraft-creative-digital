@@ -5,30 +5,69 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { toast } from "sonner";
+import { useToast } from "@/hooks/use-toast";
 import { Mail, Phone, MapPin, Send } from "lucide-react";
 
 const ContactForm = () => {
+  const { toast } = useToast();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     company: "",
     service: "",
     budget: "",
-    message: ""
+    message: "",
+    website: "",
+    facebookPage: ""
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    toast.success("Message sent successfully! We'll get back to you within 24 hours.");
-    setFormData({
-      name: "",
-      email: "",
-      company: "",
-      service: "",
-      budget: "",
-      message: ""
-    });
+    
+    // Create email content for business owner
+    const emailContent = `
+New Consultation Request from Website
+
+Contact Information:
+- Name: ${formData.name}
+- Email: ${formData.email}
+- Company: ${formData.company}
+- Website: ${formData.website}
+- Facebook Page: ${formData.facebookPage}
+
+Project Details:
+- Service Interested: ${formData.service}
+- Budget Range: ${formData.budget}
+- Project Details: ${formData.message}
+    `;
+
+    try {
+      // In a real application, you would send this to your backend
+      console.log("Contact form data:", { ...formData, emailContent });
+      
+      toast({
+        title: "Thank You for Your Interest!",
+        description: "We've received your consultation request and will contact you within 24 hours to schedule a meeting and discuss your business needs.",
+      });
+      
+      // Reset form
+      setFormData({
+        name: "",
+        email: "",
+        company: "",
+        service: "",
+        budget: "",
+        message: "",
+        website: "",
+        facebookPage: ""
+      });
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: "Something went wrong. Please try again.",
+        variant: "destructive"
+      });
+    }
   };
 
   const handleChange = (field: string, value: string) => {
@@ -50,7 +89,7 @@ const ContactForm = () => {
             <span className="gradient-text">Amazing Together</span>
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Ready to take your business to the next level? Get in touch with our team 
+            Ready to spark your business growth? Get in touch with our team 
             and let's discuss how we can help you achieve your goals.
           </p>
         </div>
@@ -66,7 +105,7 @@ const ContactForm = () => {
                   </div>
                   <div>
                     <h3 className="font-semibold mb-1">Email Us</h3>
-                    <p className="text-muted-foreground">hello@sparkcraftstudio.com</p>
+                    <p className="text-muted-foreground">contact@sparkcraftstudio.xyz</p>
                   </div>
                 </div>
               </CardContent>
@@ -80,7 +119,7 @@ const ContactForm = () => {
                   </div>
                   <div>
                     <h3 className="font-semibold mb-1">Call Us</h3>
-                    <p className="text-muted-foreground">+1 (555) 123-4567</p>
+                    <p className="text-muted-foreground">+8801858151299 (WhatsApp)</p>
                   </div>
                 </div>
               </CardContent>
@@ -94,7 +133,7 @@ const ContactForm = () => {
                   </div>
                   <div>
                     <h3 className="font-semibold mb-1">Visit Us</h3>
-                    <p className="text-muted-foreground">123 Creative Street, Design City, DC 12345</p>
+                    <p className="text-muted-foreground">Banani, Dhaka, Bangladesh</p>
                   </div>
                 </div>
               </CardContent>
@@ -105,100 +144,121 @@ const ContactForm = () => {
           <div className="lg:col-span-2">
             <Card className="card-3d">
               <CardHeader>
-                <CardTitle className="text-2xl font-bold">Start Your Project</CardTitle>
+                <CardTitle className="text-2xl font-bold">Free Business Consultation</CardTitle>
                 <CardDescription>
-                  Fill out the form below and we'll get back to you within 24 hours with a custom proposal.
+                  Share your business details and goals. We'll schedule a meeting to discuss your specific needs and create a custom strategy.
                 </CardDescription>
               </CardHeader>
               <CardContent>
                 <form onSubmit={handleSubmit} className="space-y-6">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div className="space-y-2">
+                    <div>
                       <Label htmlFor="name">Full Name *</Label>
                       <Input
                         id="name"
                         value={formData.name}
                         onChange={(e) => handleChange("name", e.target.value)}
-                        placeholder="John Doe"
+                        placeholder="Your Name"
                         required
-                        className="bg-muted/50 border-border/50"
+                        className="bg-background/50 border-border/50"
                       />
                     </div>
-                    <div className="space-y-2">
-                      <Label htmlFor="email">Email *</Label>
+                    <div>
+                      <Label htmlFor="email">Email Address *</Label>
                       <Input
                         id="email"
                         type="email"
                         value={formData.email}
                         onChange={(e) => handleChange("email", e.target.value)}
-                        placeholder="john@example.com"
+                        placeholder="your@email.com"
                         required
-                        className="bg-muted/50 border-border/50"
+                        className="bg-background/50 border-border/50"
+                      />
+                    </div>
+                  </div>
+
+                  <div>
+                    <Label htmlFor="company">Company Name *</Label>
+                    <Input
+                      id="company"
+                      value={formData.company}
+                      onChange={(e) => handleChange("company", e.target.value)}
+                      placeholder="Your Company Name"
+                      required
+                      className="bg-background/50 border-border/50"
+                    />
+                  </div>
+
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                      <Label htmlFor="website">Website URL</Label>
+                      <Input
+                        id="website"
+                        value={formData.website}
+                        onChange={(e) => handleChange("website", e.target.value)}
+                        placeholder="https://yourwebsite.com"
+                        className="bg-background/50 border-border/50"
+                      />
+                    </div>
+                    <div>
+                      <Label htmlFor="facebookPage">Facebook Page URL</Label>
+                      <Input
+                        id="facebookPage"
+                        value={formData.facebookPage}
+                        onChange={(e) => handleChange("facebookPage", e.target.value)}
+                        placeholder="https://facebook.com/yourpage"
+                        className="bg-background/50 border-border/50"
                       />
                     </div>
                   </div>
 
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div className="space-y-2">
-                      <Label htmlFor="company">Company</Label>
-                      <Input
-                        id="company"
-                        value={formData.company}
-                        onChange={(e) => handleChange("company", e.target.value)}
-                        placeholder="Your Company"
-                        className="bg-muted/50 border-border/50"
-                      />
-                    </div>
-                    <div className="space-y-2">
-                      <Label htmlFor="service">Service Needed</Label>
+                    <div>
+                      <Label htmlFor="service">Service Interested In</Label>
                       <Select onValueChange={(value) => handleChange("service", value)}>
-                        <SelectTrigger className="bg-muted/50 border-border/50">
+                        <SelectTrigger className="bg-background/50 border-border/50">
                           <SelectValue placeholder="Select a service" />
                         </SelectTrigger>
                         <SelectContent>
-                          <SelectItem value="brand-design">Brand Design</SelectItem>
-                          <SelectItem value="digital-marketing">Digital Marketing</SelectItem>
+                          <SelectItem value="social-media-marketing">Social Media Marketing</SelectItem>
                           <SelectItem value="web-development">Web Development</SelectItem>
                           <SelectItem value="content-strategy">Content Strategy</SelectItem>
                           <SelectItem value="video-production">Video Production</SelectItem>
-                          <SelectItem value="app-development">App Development</SelectItem>
                           <SelectItem value="multiple">Multiple Services</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+                    <div>
+                      <Label htmlFor="budget">Budget Range</Label>
+                      <Select onValueChange={(value) => handleChange("budget", value)}>
+                        <SelectTrigger className="bg-background/50 border-border/50">
+                          <SelectValue placeholder="Select budget range" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="under-5k">Under $5,000</SelectItem>
+                          <SelectItem value="5k-15k">$5,000 - $15,000</SelectItem>
+                          <SelectItem value="15k-30k">$15,000 - $30,000</SelectItem>
+                          <SelectItem value="30k-plus">$30,000+</SelectItem>
+                          <SelectItem value="discuss">Let's discuss</SelectItem>
                         </SelectContent>
                       </Select>
                     </div>
                   </div>
 
-                  <div className="space-y-2">
-                    <Label htmlFor="budget">Project Budget</Label>
-                    <Select onValueChange={(value) => handleChange("budget", value)}>
-                      <SelectTrigger className="bg-muted/50 border-border/50">
-                        <SelectValue placeholder="Select your budget range" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="under-5k">Under $5,000</SelectItem>
-                        <SelectItem value="5k-10k">$5,000 - $10,000</SelectItem>
-                        <SelectItem value="10k-25k">$10,000 - $25,000</SelectItem>
-                        <SelectItem value="25k-50k">$25,000 - $50,000</SelectItem>
-                        <SelectItem value="over-50k">Over $50,000</SelectItem>
-                      </SelectContent>
-                    </Select>
-                  </div>
-
-                  <div className="space-y-2">
-                    <Label htmlFor="message">Project Details *</Label>
+                  <div>
+                    <Label htmlFor="message">Project Details & Business Goals *</Label>
                     <Textarea
                       id="message"
                       value={formData.message}
                       onChange={(e) => handleChange("message", e.target.value)}
-                      placeholder="Tell us about your project, goals, and any specific requirements..."
-                      rows={4}
+                      placeholder="Tell us about your business, current challenges, project goals, and what success looks like for you..."
+                      className="bg-background/50 border-border/50 min-h-[120px]"
                       required
-                      className="bg-muted/50 border-border/50"
                     />
                   </div>
 
                   <Button type="submit" className="btn-gradient w-full text-lg py-3">
-                    Send Message
+                    Schedule Free Consultation
                     <Send size={20} className="ml-2" />
                   </Button>
                 </form>

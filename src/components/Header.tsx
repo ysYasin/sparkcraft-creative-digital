@@ -34,11 +34,18 @@ const Header = () => {
       <div className="container mx-auto px-4 py-4">
         <div className="flex items-center justify-between">
           {/* Logo */}
-          <Link to="/" className="flex items-center space-x-2">
-            <div className="w-10 h-10 bg-gradient-primary rounded-xl flex items-center justify-center">
-              <span className="text-xl font-bold text-primary-foreground">S</span>
+          <Link to="/" className="flex items-center space-x-3">
+            <div className="w-10 h-10 rounded-lg flex items-center justify-center overflow-hidden">
+              <img 
+                src="/lovable-uploads/4b142bf1-2cf8-49c7-9a25-776ae0bf0e52.png" 
+                alt="Spark Craft Studio Logo" 
+                className="w-full h-full object-contain"
+              />
             </div>
-            <span className="text-xl font-bold gradient-text">Spark Craft Studio</span>
+            <div className="hidden sm:block">
+              <h1 className="text-lg md:text-xl font-bold gradient-text">Spark Craft Studio</h1>
+              <p className="text-xs text-muted-foreground hidden md:block">Creative Marketing Agency</p>
+            </div>
           </Link>
 
           {/* Desktop Navigation */}

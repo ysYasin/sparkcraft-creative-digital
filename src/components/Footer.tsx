@@ -81,9 +81,13 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 mb-12">
           {/* Company Info */}
           <div className="lg:col-span-2">
-            <div className="flex items-center space-x-2 mb-6">
-              <div className="w-10 h-10 bg-gradient-primary rounded-xl flex items-center justify-center">
-                <span className="text-xl font-bold text-primary-foreground">S</span>
+            <div className="flex items-center space-x-3 mb-6">
+              <div className="w-10 h-10 rounded-lg flex items-center justify-center overflow-hidden">
+                <img 
+                  src="/lovable-uploads/4b142bf1-2cf8-49c7-9a25-776ae0bf0e52.png" 
+                  alt="Spark Craft Studio Logo" 
+                  className="w-full h-full object-contain"
+                />
               </div>
               <span className="text-xl font-bold gradient-text">Spark Craft Studio</span>
             </div>
@@ -96,15 +100,15 @@ const Footer = () => {
             <div className="space-y-3 mb-6">
               <div className="flex items-center space-x-3">
                 <Mail size={16} className="text-primary" />
-                <span className="text-sm">hello@sparkcraftstudio.com</span>
+                <span className="text-sm">contact@sparkcraftstudio.xyz</span>
               </div>
               <div className="flex items-center space-x-3">
                 <Phone size={16} className="text-primary" />
-                <span className="text-sm">+1 (555) 123-4567</span>
+                <span className="text-sm">+8801858151299 (WhatsApp)</span>
               </div>
               <div className="flex items-center space-x-3">
                 <MapPin size={16} className="text-primary" />
-                <span className="text-sm">123 Creative Street, Design City, DC 12345</span>
+                <span className="text-sm">Banani, Dhaka, Bangladesh</span>
               </div>
             </div>
 

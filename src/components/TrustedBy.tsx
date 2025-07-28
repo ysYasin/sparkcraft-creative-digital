@@ -49,9 +49,9 @@ const TrustedBy = () => {
             <br />
             Trust Our Expertise
           </h2>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            From startups to Fortune 500 companies, businesses worldwide choose 
-            Spark Craft Studio for their digital transformation needs.
+          <p className="text-xl text-muted-foreground mb-12 max-w-3xl mx-auto">
+            From restaurants to real estate companies and fitness centers, 
+            businesses across diverse industries worldwide trust Spark Craft Studio.
           </p>
         </div>
 

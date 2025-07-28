@@ -36,17 +36,24 @@ const Hero = () => {
 
           {/* Subtitle */}
           <p className="text-xl md:text-2xl text-muted-foreground mb-8 max-w-3xl mx-auto leading-relaxed">
-            Transform your business with cutting-edge marketing strategies, stunning designs, 
+            Transform your business with cutting-edge social media marketing, stunning designs, 
             and data-driven campaigns that convert visitors into loyal customers.
           </p>
 
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
-            <Button className="btn-gradient text-lg px-8 py-4 group">
+            <Button 
+              className="btn-gradient text-lg px-8 py-4 group"
+              onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+            >
               Start Your Journey
               <ArrowRight size={20} className="ml-2 group-hover:translate-x-1 transition-transform" />
             </Button>
-            <Button variant="outline" className="text-lg px-8 py-4 border-border/50 hover:bg-muted/50">
+            <Button 
+              variant="outline" 
+              className="text-lg px-8 py-4 border-border/50 hover:bg-muted/50"
+              onClick={() => document.getElementById('services')?.scrollIntoView({ behavior: 'smooth' })}
+            >
               View Our Work
             </Button>
           </div>
@@ -70,9 +77,9 @@ const Hero = () => {
             <div className="card-3d p-6">
               <div className="flex items-center justify-center mb-2">
                 <Sparkles className="text-accent mr-2" size={24} />
-                <span className="text-3xl font-bold gradient-text">2M+</span>
+                <span className="text-3xl font-bold gradient-text">50K+</span>
               </div>
-              <p className="text-muted-foreground">Leads Generated</p>
+              <p className="text-muted-foreground">Quality Leads Generated</p>
             </div>
           </div>
         </div>

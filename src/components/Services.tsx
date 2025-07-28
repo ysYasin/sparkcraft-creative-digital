@@ -1,5 +1,7 @@
+import { useState } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import ServiceLeadForm from "@/components/ServiceLeadForm";
 import { 
   Palette, 
   BarChart3, 
@@ -12,13 +14,13 @@ import {
 } from "lucide-react";
 
 const Services = () => {
+  const [selectedService, setSelectedService] = useState<string | null>(null);
   const services = [
     {
       icon: BarChart3,
-      title: "Digital Marketing",
-      description: "Data-driven marketing strategies that boost your online presence and drive measurable results.",
-      features: ["SEO Optimization", "Social Media", "PPC Campaigns", "Analytics"],
-      price: "Starting at $1,800",
+      title: "Social Media Marketing",
+      description: "Comprehensive social media strategies that build brand awareness and drive engagement across all platforms.",
+      features: ["Content Creation", "Community Management", "Paid Advertising", "Analytics & Reporting"],
       slug: "digital-marketing"
     },
     {
@@ -26,7 +28,6 @@ const Services = () => {
       title: "Web Development",
       description: "Modern, responsive websites that convert visitors into customers and grow your business.",
       features: ["Custom Development", "E-commerce", "CMS Integration", "Mobile Responsive"],
-      price: "Starting at $3,500",
       slug: "web-development"
     },
     {
@@ -34,7 +35,6 @@ const Services = () => {
       title: "Content Strategy",
       description: "Engaging content that tells your story and builds meaningful connections with your audience.",
       features: ["Content Planning", "Copywriting", "Blog Strategy", "Email Campaigns"],
-      price: "Starting at $1,200",
       slug: "content-strategy"
     },
     {
@@ -42,7 +42,6 @@ const Services = () => {
       title: "Video Production",
       description: "Professional video content that captures attention and drives engagement across all platforms.",
       features: ["Commercial Videos", "Social Content", "Animation", "Live Streaming"],
-      price: "Starting at $2,000",
       slug: "video-production"
     }
   ];
@@ -62,8 +61,8 @@ const Services = () => {
             for Your Business
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            From brand design to digital marketing, we offer end-to-end solutions 
-            that help your business thrive in the digital landscape.
+            We spark your business growth with our comprehensive social media marketing, 
+            web development, content strategy, and video production services.
           </p>
         </div>
 
@@ -89,15 +88,12 @@ const Services = () => {
                     </li>
                   ))}
                 </ul>
-                <div className="flex items-center justify-between">
-                  <span className="text-lg font-semibold gradient-text">{service.price}</span>
+                <div className="flex items-center justify-center">
                   <Button 
-                    size="sm" 
-                    variant="outline" 
-                    className="group-hover:bg-primary group-hover:text-primary-foreground transition-colors"
-                    onClick={() => window.location.href = `/${service.slug}`}
+                    className="w-full btn-gradient"
+                    onClick={() => setSelectedService(service.title)}
                   >
-                    Learn More
+                    Get Quote
                     <ArrowRight size={16} className="ml-1" />
                   </Button>
                 </div>
@@ -112,12 +108,24 @@ const Services = () => {
           <p className="text-muted-foreground mb-8 max-w-2xl mx-auto">
             Let's discuss your project and create a custom solution that drives real results for your business.
           </p>
-          <Button className="btn-gradient text-lg px-8 py-4">
+          <Button 
+            className="btn-gradient text-lg px-8 py-4"
+            onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+          >
             Get Free Consultation
             <ArrowRight size={20} className="ml-2" />
           </Button>
         </div>
       </div>
+
+      {/* Service Lead Form Modal */}
+      {selectedService && (
+        <ServiceLeadForm
+          service={selectedService}
+          isOpen={true}
+          onClose={() => setSelectedService(null)}
+        />
+      )}
     </section>
   );
 };
