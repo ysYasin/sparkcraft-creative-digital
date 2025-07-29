@@ -1,344 +1,246 @@
+import React, { useState } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { useState } from "react";
-import { toast } from "sonner";
-import { 
-  Download, 
-  BookOpen, 
-  Star, 
-  CheckCircle, 
-  Users,
-  TrendingUp,
-  Lightbulb,
-  Target
-} from "lucide-react";
+import { Progress } from "@/components/ui/progress";
+import { Star, Download, Users, BookOpen, TrendingUp, Target, Lightbulb, BarChart, Clock, FileText } from "lucide-react";
+import { useToast } from "@/hooks/use-toast";
 
 const Ebook = () => {
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
+  const { toast } = useToast();
 
   const handleDownload = (e: React.FormEvent) => {
     e.preventDefault();
     if (!email || !name) {
-      toast.error("Please fill in all fields");
+      toast({
+        title: "Error",
+        description: "Please fill in all fields",
+        variant: "destructive"
+      });
       return;
     }
-    toast.success("Download link sent to your email! Check your inbox.");
+    toast({
+      title: "Success",
+      description: "Download link sent to your email! Check your inbox."
+    });
     setEmail("");
     setName("");
   };
 
-  const benefits = [
-    "Proven strategies used by 500+ successful businesses",
-    "Step-by-step implementation guides",
-    "Real-world case studies and examples",
-    "Templates and checklists for immediate use",
-    "Expert insights from industry leaders",
-    "Actionable tips for immediate results"
-  ];
-
-  const chapters = [
-    {
-      title: "Understanding Your Market",
-      description: "Deep dive into market research and customer analysis"
-    },
-    {
-      title: "Brand Positioning Strategy",
-      description: "How to position your brand for maximum impact"
-    },
-    {
-      title: "Digital Marketing Foundations",
-      description: "Building a strong digital presence across all channels"
-    },
-    {
-      title: "Content That Converts",
-      description: "Creating compelling content that drives action"
-    },
-    {
-      title: "Social Media Mastery",
-      description: "Leveraging social platforms for business growth"
-    },
-    {
-      title: "Measuring Success",
-      description: "KPIs and metrics that matter for your business"
-    }
-  ];
-
-  const testimonials = [
-    {
-      quote: "This e-book transformed how we approach marketing. Our leads increased by 200% in just 2 months!",
-      author: "Jennifer Walsh",
-      position: "Marketing Director",
-      rating: 5
-    },
-    {
-      quote: "Practical, actionable advice that actually works. The templates alone saved us weeks of work.",
-      author: "David Kim",
-      position: "Small Business Owner",
-      rating: 5
-    },
-    {
-      quote: "A comprehensive guide that covers everything you need to know about modern marketing.",
-      author: "Lisa Rodriguez",
-      position: "Startup Founder",
-      rating: 5
-    }
-  ];
-
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-gradient-to-br from-emerald-50 via-teal-50 to-cyan-50 dark:from-emerald-900/20 dark:via-teal-900/20 dark:to-cyan-900/20">
       <Header />
-      <main className="pt-20">
-        {/* Hero Section */}
-        <section className="py-20 relative overflow-hidden">
-          <div className="absolute inset-0">
-            <div className="absolute top-20 left-10 w-20 h-20 bg-primary/10 rounded-full blur-xl float" />
-            <div className="absolute bottom-20 right-10 w-32 h-32 bg-secondary/10 rounded-full blur-xl float" style={{ animationDelay: "2s" }} />
-          </div>
-          
-          <div className="container mx-auto px-4">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-              <div>
-                <Badge variant="outline" className="mb-6 px-4 py-2">
-                  <BookOpen size={16} className="mr-2" />
-                  Free E-Book
-                </Badge>
-                
-                <h1 className="text-5xl md:text-6xl font-bold leading-tight mb-6">
-                  <span className="gradient-text">Makanisome:</span>
-                  <br />
-                  The Ultimate Marketing Playbook
-                </h1>
-                
-                <p className="text-xl text-muted-foreground mb-8">
-                  Discover the proven strategies that have helped over 500 businesses 
-                  transform their marketing and achieve unprecedented growth.
-                </p>
-
-                <div className="flex items-center space-x-6 mb-8">
-                  <div className="flex items-center space-x-2">
-                    <Users size={20} className="text-primary" />
-                    <span className="text-sm text-muted-foreground">10,000+ Downloads</span>
-                  </div>
-                  <div className="flex items-center space-x-2">
-                    <div className="flex">
-                      {[...Array(5)].map((_, i) => (
-                        <Star key={i} size={16} className="text-yellow-400 fill-current" />
-                      ))}
-                    </div>
-                    <span className="text-sm text-muted-foreground">4.9/5 Rating</span>
-                  </div>
-                </div>
-
-                <ul className="space-y-3 mb-8">
-                  {benefits.slice(0, 3).map((benefit, index) => (
-                    <li key={index} className="flex items-center space-x-3">
-                      <CheckCircle size={20} className="text-primary flex-shrink-0" />
-                      <span className="text-muted-foreground">{benefit}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              {/* Download Form */}
-              <div className="card-3d p-8">
-                <div className="text-center mb-6">
-                  <div className="w-20 h-20 bg-gradient-primary rounded-xl flex items-center justify-center mx-auto mb-4">
-                    <Download size={32} className="text-primary-foreground" />
-                  </div>
-                  <h3 className="text-2xl font-bold mb-2">Download Your Free Copy</h3>
-                  <p className="text-muted-foreground">
-                    Get instant access to the complete 120-page marketing playbook
-                  </p>
-                </div>
-
-                <form onSubmit={handleDownload} className="space-y-4">
-                  <div className="space-y-2">
-                    <Label htmlFor="name">Full Name</Label>
-                    <Input
-                      id="name"
-                      value={name}
-                      onChange={(e) => setName(e.target.value)}
-                      placeholder="Enter your full name"
-                      required
-                      className="bg-background/50"
-                    />
-                  </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="email">Email Address</Label>
-                    <Input
-                      id="email"
-                      type="email"
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
-                      placeholder="Enter your email"
-                      required
-                      className="bg-background/50"
-                    />
-                  </div>
-                  <Button type="submit" className="btn-gradient w-full text-lg py-3">
-                    Download Free E-Book
-                    <Download size={20} className="ml-2" />
-                  </Button>
-                </form>
-
-                <p className="text-xs text-muted-foreground text-center mt-4">
-                  No spam. Unsubscribe at any time. Your data is 100% secure.
-                </p>
-              </div>
+      
+      {/* Hero Section */}
+      <section className="py-20 relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-r from-emerald-500/10 to-teal-500/10 animate-pulse"></div>
+        <div className="container mx-auto px-4 relative z-10">
+          <div className="text-center max-w-4xl mx-auto">
+            <div className="inline-block px-4 py-2 bg-gradient-to-r from-emerald-500 to-teal-500 text-white rounded-full text-sm font-medium mb-6 animate-bounce">
+              📚 In Production
             </div>
-          </div>
-        </section>
-
-        {/* What's Inside */}
-        <section className="py-20 bg-muted/20">
-          <div className="container mx-auto px-4">
-            <div className="text-center mb-16">
-              <h2 className="text-4xl md:text-5xl font-bold mb-6">
-                What's <span className="gradient-text">Inside</span>
-              </h2>
-              <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-                120 pages of actionable strategies, real-world examples, and proven frameworks.
-              </p>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {chapters.map((chapter, index) => (
-                <Card key={index} className="card-3d">
-                  <CardHeader>
-                    <div className="w-12 h-12 bg-gradient-primary rounded-lg flex items-center justify-center mb-4">
-                      <span className="text-lg font-bold text-primary-foreground">{index + 1}</span>
-                    </div>
-                    <CardTitle className="text-xl">{chapter.title}</CardTitle>
-                    <CardDescription>{chapter.description}</CardDescription>
-                  </CardHeader>
-                </Card>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Benefits */}
-        <section className="py-20">
-          <div className="container mx-auto px-4">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-              <div>
-                <h2 className="text-4xl md:text-5xl font-bold mb-6">
-                  Why <span className="gradient-text">10,000+</span> Business Owners
-                  <br />
-                  Love This Guide
-                </h2>
-                <p className="text-lg text-muted-foreground mb-8">
-                  This isn't just another marketing e-book. It's a comprehensive playbook 
-                  based on real strategies that have generated millions in revenue.
-                </p>
-
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div className="flex items-start space-x-3">
-                    <div className="w-10 h-10 bg-primary/20 rounded-lg flex items-center justify-center flex-shrink-0">
-                      <TrendingUp size={20} className="text-primary" />
-                    </div>
-                    <div>
-                      <h4 className="font-semibold mb-1">Proven Results</h4>
-                      <p className="text-sm text-muted-foreground">Strategies tested with real businesses</p>
-                    </div>
-                  </div>
-                  <div className="flex items-start space-x-3">
-                    <div className="w-10 h-10 bg-secondary/20 rounded-lg flex items-center justify-center flex-shrink-0">
-                      <Lightbulb size={20} className="text-secondary" />
-                    </div>
-                    <div>
-                      <h4 className="font-semibold mb-1">Actionable Insights</h4>
-                      <p className="text-sm text-muted-foreground">No fluff, just practical advice</p>
-                    </div>
-                  </div>
-                  <div className="flex items-start space-x-3">
-                    <div className="w-10 h-10 bg-accent/20 rounded-lg flex items-center justify-center flex-shrink-0">
-                      <Target size={20} className="text-accent" />
-                    </div>
-                    <div>
-                      <h4 className="font-semibold mb-1">Step-by-Step</h4>
-                      <p className="text-sm text-muted-foreground">Easy to follow implementation</p>
-                    </div>
-                  </div>
-                  <div className="flex items-start space-x-3">
-                    <div className="w-10 h-10 bg-primary/20 rounded-lg flex items-center justify-center flex-shrink-0">
-                      <CheckCircle size={20} className="text-primary" />
-                    </div>
-                    <div>
-                      <h4 className="font-semibold mb-1">Templates Included</h4>
-                      <p className="text-sm text-muted-foreground">Ready-to-use resources</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div className="space-y-6">
-                {benefits.map((benefit, index) => (
-                  <div key={index} className="flex items-center space-x-3">
-                    <CheckCircle size={20} className="text-primary flex-shrink-0" />
-                    <span className="text-muted-foreground">{benefit}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Testimonials */}
-        <section className="py-20 bg-muted/20">
-          <div className="container mx-auto px-4">
-            <div className="text-center mb-16">
-              <h2 className="text-4xl md:text-5xl font-bold mb-6">
-                What Readers Are <span className="gradient-text">Saying</span>
-              </h2>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              {testimonials.map((testimonial, index) => (
-                <Card key={index} className="card-3d">
-                  <CardContent className="p-6">
-                    <div className="flex items-center mb-4">
-                      {[...Array(testimonial.rating)].map((_, i) => (
-                        <Star key={i} size={16} className="text-yellow-400 fill-current" />
-                      ))}
-                    </div>
-                    <blockquote className="text-muted-foreground mb-4 italic">
-                      "{testimonial.quote}"
-                    </blockquote>
-                    <div>
-                      <div className="font-semibold">{testimonial.author}</div>
-                      <div className="text-sm text-muted-foreground">{testimonial.position}</div>
-                    </div>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Final CTA */}
-        <section className="py-20">
-          <div className="container mx-auto px-4 text-center">
-            <h2 className="text-4xl md:text-5xl font-bold mb-6">
-              Ready to Transform Your <span className="gradient-text">Marketing?</span>
-            </h2>
-            <p className="text-xl text-muted-foreground mb-8 max-w-3xl mx-auto">
-              Join thousands of business owners who have already downloaded Makanisome 
-              and are seeing real results in their marketing efforts.
+            <h1 className="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-emerald-600 via-teal-600 to-cyan-600 bg-clip-text text-transparent">
+              The Ultimate Digital Marketing E-book
+            </h1>
+            <p className="text-xl text-muted-foreground mb-8">
+              A comprehensive guide packed with proven strategies, real case studies, and actionable insights for modern marketers.
             </p>
-            <Button className="btn-gradient text-lg px-8 py-4">
-              Download Your Free Copy Now
-              <Download size={20} className="ml-2" />
+            
+            {/* Progress Section */}
+            <div className="max-w-lg mx-auto mb-12">
+              <Card className="p-6 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm">
+                <div className="flex justify-between text-sm font-medium mb-3">
+                  <span className="flex items-center gap-2">
+                    <FileText className="w-4 h-4" />
+                    E-book Writing Progress
+                  </span>
+                  <span className="text-emerald-600 font-bold">80%</span>
+                </div>
+                <Progress value={80} className="h-4 bg-emerald-100 mb-3" />
+                <div className="grid grid-cols-3 gap-2 text-xs">
+                  <div className="text-center">
+                    <div className="font-medium text-emerald-600">✓ Research</div>
+                    <div className="text-muted-foreground">Complete</div>
+                  </div>
+                  <div className="text-center">
+                    <div className="font-medium text-emerald-600">✓ Writing</div>
+                    <div className="text-muted-foreground">80% Done</div>
+                  </div>
+                  <div className="text-center">
+                    <div className="font-medium text-muted-foreground">⏳ Design</div>
+                    <div className="text-muted-foreground">In Queue</div>
+                  </div>
+                </div>
+              </Card>
+            </div>
+            
+            {/* Expected Features */}
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mt-12">
+              <div className="text-center p-6 bg-white/60 dark:bg-gray-800/60 rounded-xl backdrop-blur-sm">
+                <div className="w-12 h-12 bg-emerald-500 text-white rounded-full flex items-center justify-center mx-auto mb-3">
+                  <BookOpen className="w-6 h-6" />
+                </div>
+                <div className="text-2xl font-bold text-emerald-600 mb-1">150+</div>
+                <div className="text-sm text-muted-foreground">Pages</div>
+              </div>
+              <div className="text-center p-6 bg-white/60 dark:bg-gray-800/60 rounded-xl backdrop-blur-sm">
+                <div className="w-12 h-12 bg-teal-500 text-white rounded-full flex items-center justify-center mx-auto mb-3">
+                  <BarChart className="w-6 h-6" />
+                </div>
+                <div className="text-2xl font-bold text-teal-600 mb-1">25+</div>
+                <div className="text-sm text-muted-foreground">Case Studies</div>
+              </div>
+              <div className="text-center p-6 bg-white/60 dark:bg-gray-800/60 rounded-xl backdrop-blur-sm">
+                <div className="w-12 h-12 bg-cyan-500 text-white rounded-full flex items-center justify-center mx-auto mb-3">
+                  <Target className="w-6 h-6" />
+                </div>
+                <div className="text-2xl font-bold text-cyan-600 mb-1">50+</div>
+                <div className="text-sm text-muted-foreground">Strategies</div>
+              </div>
+              <div className="text-center p-6 bg-white/60 dark:bg-gray-800/60 rounded-xl backdrop-blur-sm">
+                <div className="w-12 h-12 bg-emerald-600 text-white rounded-full flex items-center justify-center mx-auto mb-3">
+                  <Lightbulb className="w-6 h-6" />
+                </div>
+                <div className="text-2xl font-bold text-emerald-700 mb-1">100+</div>
+                <div className="text-sm text-muted-foreground">Tips & Tricks</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Coming Soon Content */}
+      <section className="py-20">
+        <div className="container mx-auto px-4">
+          <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 bg-gradient-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent">
+            What Will Be Inside
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <Card className="p-6 bg-gradient-to-br from-emerald-100 to-teal-100 dark:from-emerald-900/30 dark:to-teal-900/30 hover:scale-105 transition-transform">
+              <div className="w-12 h-12 bg-emerald-500 text-white rounded-lg flex items-center justify-center mb-4">
+                <TrendingUp className="w-6 h-6" />
+              </div>
+              <h3 className="text-xl font-bold mb-3">Social Media Mastery</h3>
+              <p className="text-muted-foreground">Complete strategies for Facebook, Instagram, TikTok, and LinkedIn marketing success.</p>
+            </Card>
+
+            <Card className="p-6 bg-gradient-to-br from-teal-100 to-cyan-100 dark:from-teal-900/30 dark:to-cyan-900/30 hover:scale-105 transition-transform">
+              <div className="w-12 h-12 bg-teal-500 text-white rounded-lg flex items-center justify-center mb-4">
+                <Target className="w-6 h-6" />
+              </div>
+              <h3 className="text-xl font-bold mb-3">Meta Ads Deep Dive</h3>
+              <p className="text-muted-foreground">Advanced Facebook and Instagram advertising techniques with real campaign examples.</p>
+            </Card>
+
+            <Card className="p-6 bg-gradient-to-br from-cyan-100 to-blue-100 dark:from-cyan-900/30 dark:to-blue-900/30 hover:scale-105 transition-transform">
+              <div className="w-12 h-12 bg-cyan-500 text-white rounded-lg flex items-center justify-center mb-4">
+                <BarChart className="w-6 h-6" />
+              </div>
+              <h3 className="text-xl font-bold mb-3">Analytics & Optimization</h3>
+              <p className="text-muted-foreground">How to measure, analyze, and optimize your marketing campaigns for maximum ROI.</p>
+            </Card>
+
+            <Card className="p-6 bg-gradient-to-br from-blue-100 to-indigo-100 dark:from-blue-900/30 dark:to-indigo-900/30 hover:scale-105 transition-transform">
+              <div className="w-12 h-12 bg-blue-500 text-white rounded-lg flex items-center justify-center mb-4">
+                <Users className="w-6 h-6" />
+              </div>
+              <h3 className="text-xl font-bold mb-3">Brand Building Strategies</h3>
+              <p className="text-muted-foreground">Create a powerful brand presence that resonates with your target audience.</p>
+            </Card>
+
+            <Card className="p-6 bg-gradient-to-br from-indigo-100 to-purple-100 dark:from-indigo-900/30 dark:to-purple-900/30 hover:scale-105 transition-transform">
+              <div className="w-12 h-12 bg-indigo-500 text-white rounded-lg flex items-center justify-center mb-4">
+                <Lightbulb className="w-6 h-6" />
+              </div>
+              <h3 className="text-xl font-bold mb-3">Content Creation Secrets</h3>
+              <p className="text-muted-foreground">Proven formulas for creating viral content that drives engagement and conversions.</p>
+            </Card>
+
+            <Card className="p-6 bg-gradient-to-br from-purple-100 to-pink-100 dark:from-purple-900/30 dark:to-pink-900/30 hover:scale-105 transition-transform">
+              <div className="w-12 h-12 bg-purple-500 text-white rounded-lg flex items-center justify-center mb-4">
+                <BookOpen className="w-6 h-6" />
+              </div>
+              <h3 className="text-xl font-bold mb-3">Case Studies & Examples</h3>
+              <p className="text-muted-foreground">Real-world success stories and detailed breakdowns of winning campaigns.</p>
+            </Card>
+          </div>
+        </div>
+      </section>
+
+      {/* Timeline Section */}
+      <section className="py-20 bg-white/50 dark:bg-gray-900/50">
+        <div className="container mx-auto px-4">
+          <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">
+            Production Timeline
+          </h2>
+          <div className="max-w-2xl mx-auto">
+            <div className="space-y-6">
+              <div className="flex items-center gap-4 p-4 bg-emerald-100 dark:bg-emerald-900/30 rounded-lg">
+                <div className="w-8 h-8 bg-emerald-500 text-white rounded-full flex items-center justify-center">✓</div>
+                <div>
+                  <h3 className="font-semibold">Research & Planning</h3>
+                  <p className="text-sm text-muted-foreground">Market research and content strategy - Completed</p>
+                </div>
+              </div>
+              
+              <div className="flex items-center gap-4 p-4 bg-teal-100 dark:bg-teal-900/30 rounded-lg">
+                <div className="w-8 h-8 bg-teal-500 text-white rounded-full flex items-center justify-center">
+                  <Clock className="w-4 h-4" />
+                </div>
+                <div>
+                  <h3 className="font-semibold">Content Writing</h3>
+                  <p className="text-sm text-muted-foreground">80% Complete - Currently writing chapters 8-12</p>
+                </div>
+              </div>
+              
+              <div className="flex items-center gap-4 p-4 bg-gray-100 dark:bg-gray-800 rounded-lg opacity-75">
+                <div className="w-8 h-8 bg-gray-400 text-white rounded-full flex items-center justify-center">3</div>
+                <div>
+                  <h3 className="font-semibold">Design & Layout</h3>
+                  <p className="text-sm text-muted-foreground">Coming Next - Professional design and formatting</p>
+                </div>
+              </div>
+              
+              <div className="flex items-center gap-4 p-4 bg-gray-100 dark:bg-gray-800 rounded-lg opacity-75">
+                <div className="w-8 h-8 bg-gray-400 text-white rounded-full flex items-center justify-center">4</div>
+                <div>
+                  <h3 className="font-semibold">Final Review & Launch</h3>
+                  <p className="text-sm text-muted-foreground">Expected Launch: Next Month</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Early Access CTA */}
+      <section className="py-20 bg-gradient-to-r from-emerald-500 to-teal-500 text-white">
+        <div className="container mx-auto px-4 text-center">
+          <h2 className="text-3xl md:text-4xl font-bold mb-6">
+            Get Early Access & Special Launch Price
+          </h2>
+          <p className="text-xl mb-8 max-w-2xl mx-auto opacity-90">
+            Join our VIP list and be the first to get this comprehensive marketing guide at a special pre-launch discount.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
+            <Button size="lg" variant="secondary" className="flex-1">
+              Join VIP List
+            </Button>
+            <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-emerald-500">
+              Get Notified
             </Button>
           </div>
-        </section>
-      </main>
+          <p className="text-sm mt-4 opacity-75">
+            VIP members get 50% off the launch price + exclusive bonuses
+          </p>
+        </div>
+      </section>
+
       <Footer />
     </div>
   );

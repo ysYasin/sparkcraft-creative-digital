@@ -133,7 +133,7 @@ const About = () => {
                   "We don't just create beautiful designs or run marketing campaigns. 
                   We craft experiences that connect brands with people and drive meaningful results."
                 </blockquote>
-                <cite className="text-muted-foreground">— Yaasin Arafat, Creative Director</cite>
+                <cite className="text-muted-foreground">— Yaasin Arafat, CEO & Head of SMM</cite>
               </div>
             </div>
           </div>

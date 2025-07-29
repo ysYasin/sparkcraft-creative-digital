@@ -31,28 +31,43 @@ const ServiceLeadForm = ({ service, isOpen, onClose }: ServiceLeadFormProps) => 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    // Create email content
-    const emailContent = `
-New ${service} Lead from Website
-
-Contact Information:
-- Name: ${formData.name}
-- Email: ${formData.email}
-- Phone: ${formData.phone}
-- Company: ${formData.company}
-- Website: ${formData.website}
-- Facebook Page: ${formData.facebookPage}
-
-Project Details:
-- Service: ${service}
-- Budget: ${formData.budget}
-- Timeline: ${formData.timeline}
-- Description: ${formData.description}
-    `;
-
     try {
-      // In a real application, you would send this to your backend
-      console.log("Lead data:", { service, ...formData, emailContent });
+      // Import EmailJS
+      const emailjs = await import('@emailjs/browser');
+      
+      // Send email to business owner
+      await emailjs.send(
+        'service_sparkcraft', // You'll need to create this service ID in EmailJS
+        'template_service_lead', // You'll need to create this template ID in EmailJS
+        {
+          to_email: 'ceosparkcraftstudio.yasin@gmail.com',
+          service_type: service,
+          from_name: formData.name,
+          from_email: formData.email,
+          phone: formData.phone,
+          company: formData.company,
+          website: formData.website,
+          facebook_page: formData.facebookPage,
+          budget: formData.budget,
+          timeline: formData.timeline,
+          description: formData.description,
+          subject: `New ${service} Lead - Spark Craft Studio`
+        },
+        'YOUR_PUBLIC_KEY' // You'll need to add your EmailJS public key
+      );
+      
+      // Send confirmation email to client
+      await emailjs.send(
+        'service_sparkcraft',
+        'template_lead_confirmation', // You'll need to create this template ID in EmailJS
+        {
+          to_email: formData.email,
+          to_name: formData.name,
+          service_type: service,
+          subject: `${service} Request Received - Spark Craft Studio`
+        },
+        'YOUR_PUBLIC_KEY'
+      );
       
       toast({
         title: "Thank You!",
@@ -74,9 +89,10 @@ Project Details:
       
       onClose();
     } catch (error) {
+      console.error('Email send failed:', error);
       toast({
         title: "Error",
-        description: "Something went wrong. Please try again.",
+        description: "Failed to send your request. Please try again or contact us directly.",
         variant: "destructive"
       });
     }

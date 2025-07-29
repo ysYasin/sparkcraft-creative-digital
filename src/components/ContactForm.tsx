@@ -24,26 +24,40 @@ const ContactForm = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    // Create email content for business owner
-    const emailContent = `
-New Consultation Request from Website
-
-Contact Information:
-- Name: ${formData.name}
-- Email: ${formData.email}
-- Company: ${formData.company}
-- Website: ${formData.website}
-- Facebook Page: ${formData.facebookPage}
-
-Project Details:
-- Service Interested: ${formData.service}
-- Budget Range: ${formData.budget}
-- Project Details: ${formData.message}
-    `;
-
     try {
-      // In a real application, you would send this to your backend
-      console.log("Contact form data:", { ...formData, emailContent });
+      // Import EmailJS
+      const emailjs = await import('@emailjs/browser');
+      
+      // Send email to business owner
+      await emailjs.send(
+        'service_sparkcraft', // You'll need to create this service ID in EmailJS
+        'template_consultation', // You'll need to create this template ID in EmailJS
+        {
+          to_email: 'ceosparkcraftstudio.yasin@gmail.com',
+          from_name: formData.name,
+          from_email: formData.email,
+          company: formData.company,
+          service: formData.service,
+          budget: formData.budget,
+          message: formData.message,
+          website: formData.website,
+          facebook_page: formData.facebookPage,
+          subject: 'New Consultation Request - Spark Craft Studio'
+        },
+        'YOUR_PUBLIC_KEY' // You'll need to add your EmailJS public key
+      );
+      
+      // Send confirmation email to client
+      await emailjs.send(
+        'service_sparkcraft',
+        'template_confirmation', // You'll need to create this template ID in EmailJS
+        {
+          to_email: formData.email,
+          to_name: formData.name,
+          subject: 'Consultation Request Received - Spark Craft Studio'
+        },
+        'YOUR_PUBLIC_KEY'
+      );
       
       toast({
         title: "Thank You for Your Interest!",
@@ -62,9 +76,10 @@ Project Details:
         facebookPage: ""
       });
     } catch (error) {
+      console.error('Email send failed:', error);
       toast({
         title: "Error",
-        description: "Something went wrong. Please try again.",
+        description: "Failed to send your request. Please try again or contact us directly.",
         variant: "destructive"
       });
     }
