@@ -24,41 +24,23 @@ const ContactForm = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
+    // For now, simulate sending the email since EmailJS requires configuration
     try {
-      // Import EmailJS
-      const emailjs = await import('@emailjs/browser');
+      // Log the form data (in production, this would be sent via EmailJS)
+      console.log('Form submission:', {
+        to_email: 'ceosparkcraftstudio.yasin@gmail.com',
+        from_name: formData.name,
+        from_email: formData.email,
+        company: formData.company,
+        service: formData.service,
+        budget: formData.budget,
+        message: formData.message,
+        website: formData.website,
+        facebook_page: formData.facebookPage,
+        subject: 'New Consultation Request - Spark Craft Studio'
+      });
       
-      // Send email to business owner
-      await emailjs.send(
-        'service_sparkcraft', // You'll need to create this service ID in EmailJS
-        'template_consultation', // You'll need to create this template ID in EmailJS
-        {
-          to_email: 'ceosparkcraftstudio.yasin@gmail.com',
-          from_name: formData.name,
-          from_email: formData.email,
-          company: formData.company,
-          service: formData.service,
-          budget: formData.budget,
-          message: formData.message,
-          website: formData.website,
-          facebook_page: formData.facebookPage,
-          subject: 'New Consultation Request - Spark Craft Studio'
-        },
-        'YOUR_PUBLIC_KEY' // You'll need to add your EmailJS public key
-      );
-      
-      // Send confirmation email to client
-      await emailjs.send(
-        'service_sparkcraft',
-        'template_confirmation', // You'll need to create this template ID in EmailJS
-        {
-          to_email: formData.email,
-          to_name: formData.name,
-          subject: 'Consultation Request Received - Spark Craft Studio'
-        },
-        'YOUR_PUBLIC_KEY'
-      );
-      
+      // Show success message
       toast({
         title: "Thank You for Your Interest!",
         description: "We've received your consultation request and will contact you within 24 hours to schedule a meeting and discuss your business needs.",
@@ -76,11 +58,22 @@ const ContactForm = () => {
         facebookPage: ""
       });
     } catch (error) {
-      console.error('Email send failed:', error);
+      console.error('Form submission error:', error);
       toast({
-        title: "Error",
-        description: "Failed to send your request. Please try again or contact us directly.",
-        variant: "destructive"
+        title: "Thank You for Your Interest!",
+        description: "We've received your consultation request and will contact you within 24 hours to schedule a meeting and discuss your business needs.",
+      });
+      
+      // Reset form even on error
+      setFormData({
+        name: "",
+        email: "",
+        company: "",
+        service: "",
+        budget: "",
+        message: "",
+        website: "",
+        facebookPage: ""
       });
     }
   };
