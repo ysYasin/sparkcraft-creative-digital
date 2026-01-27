@@ -36,6 +36,9 @@ const About = () => {
     }
   ];
 
+  const scrollToContact = () => {
+    window.location.href = '/#contact';
+  };
 
   return (
     <div className="min-h-screen">
@@ -95,7 +98,7 @@ const About = () => {
                   strategic marketing, and cutting-edge technology that drives real growth 
                   and creates lasting impact in the digital world.
                 </p>
-                <Button className="btn-gradient">
+                <Button className="btn-gradient" onClick={scrollToContact}>
                   Learn More About Our Work
                   <ArrowRight size={20} className="ml-2" />
                 </Button>
@@ -151,7 +154,7 @@ const About = () => {
             <p className="text-xl text-muted-foreground mb-8 max-w-3xl mx-auto">
               Let's discuss your project and create something amazing that drives real results for your business.
             </p>
-            <Button className="btn-gradient text-lg px-8 py-4">
+            <Button className="btn-gradient text-lg px-8 py-4" onClick={scrollToContact}>
               Start Your Project
               <ArrowRight size={20} className="ml-2" />
             </Button>

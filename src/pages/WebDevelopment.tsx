@@ -8,8 +8,7 @@ import {
   Code, 
   Smartphone, 
   ShoppingCart, 
-  Database, 
-  Zap,
+  Database,
   ArrowRight,
   CheckCircle,
   Star
@@ -42,7 +41,7 @@ const WebDevelopment = () => {
   const packages = [
     {
       name: "Business",
-      price: "$3,500",
+      investment: "$3,500",
       period: "",
       description: "Perfect for small to medium businesses",
       features: [
@@ -56,7 +55,7 @@ const WebDevelopment = () => {
     },
     {
       name: "E-commerce",
-      price: "$7,500",
+      investment: "$7,500",
       period: "",
       description: "Complete online store solution",
       features: [
@@ -72,7 +71,7 @@ const WebDevelopment = () => {
     },
     {
       name: "Enterprise",
-      price: "Custom",
+      investment: "Custom",
       period: "",
       description: "Large-scale web applications",
       features: [
@@ -91,6 +90,10 @@ const WebDevelopment = () => {
     "React", "TypeScript", "Next.js", "Node.js", "Tailwind CSS", 
     "Shopify", "WordPress", "Strapi", "MongoDB", "PostgreSQL"
   ];
+
+  const scrollToContact = () => {
+    window.location.href = '/#contact';
+  };
 
   return (
     <div className="min-h-screen">
@@ -111,7 +114,7 @@ const WebDevelopment = () => {
               <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
                 Responsive, fast-loading websites built with cutting-edge technology that turn your visitors into customers and grow your business.
               </p>
-              <Button className="btn-gradient text-lg px-8 py-4">
+              <Button className="btn-gradient text-lg px-8 py-4" onClick={scrollToContact}>
                 Start Your Project
                 <ArrowRight size={20} className="ml-2" />
               </Button>
@@ -194,7 +197,7 @@ const WebDevelopment = () => {
                   <CardHeader className="text-center">
                     <CardTitle className="text-2xl">{pkg.name}</CardTitle>
                     <div className="mb-4">
-                      <span className="text-4xl font-bold gradient-text">{pkg.price}</span>
+                      <span className="text-4xl font-bold gradient-text">{pkg.investment}</span>
                       <span className="text-muted-foreground">{pkg.period}</span>
                     </div>
                     <CardDescription>{pkg.description}</CardDescription>
@@ -211,6 +214,7 @@ const WebDevelopment = () => {
                     <Button 
                       className={pkg.popular ? "btn-gradient w-full" : "w-full"} 
                       variant={pkg.popular ? "default" : "outline"}
+                      onClick={scrollToContact}
                     >
                       Get Started
                     </Button>
@@ -230,7 +234,7 @@ const WebDevelopment = () => {
             <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
               Let's discuss your project and create a website that perfectly represents your brand.
             </p>
-            <Button className="btn-gradient text-lg px-8 py-4">
+            <Button className="btn-gradient text-lg px-8 py-4" onClick={scrollToContact}>
               Get Free Quote
               <ArrowRight size={20} className="ml-2" />
             </Button>

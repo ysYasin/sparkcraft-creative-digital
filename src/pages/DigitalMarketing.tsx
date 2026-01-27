@@ -9,7 +9,6 @@ import {
   TrendingUp, 
   Search, 
   Share2, 
-  DollarSign,
   ArrowRight,
   CheckCircle,
   Star
@@ -42,7 +41,7 @@ const DigitalMarketing = () => {
   const packages = [
     {
       name: "Starter",
-      price: "$1,800",
+      investment: "$1,800",
       period: "/month",
       description: "Perfect for small businesses getting started",
       features: [
@@ -54,7 +53,7 @@ const DigitalMarketing = () => {
     },
     {
       name: "Growth",
-      price: "$3,500",
+      investment: "$3,500",
       period: "/month",
       description: "Ideal for growing businesses",
       features: [
@@ -69,7 +68,7 @@ const DigitalMarketing = () => {
     },
     {
       name: "Enterprise",
-      price: "Custom",
+      investment: "Custom",
       period: "",
       description: "For large-scale operations",
       features: [
@@ -81,6 +80,10 @@ const DigitalMarketing = () => {
       ]
     }
   ];
+
+  const scrollToContact = () => {
+    window.location.href = '/#contact';
+  };
 
   return (
     <div className="min-h-screen">
@@ -101,7 +104,7 @@ const DigitalMarketing = () => {
               <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
                 Boost your online presence and drive measurable results with our comprehensive digital marketing strategies that convert visitors into customers.
               </p>
-              <Button className="btn-gradient text-lg px-8 py-4">
+              <Button className="btn-gradient text-lg px-8 py-4" onClick={scrollToContact}>
                 Get Free Marketing Audit
                 <ArrowRight size={20} className="ml-2" />
               </Button>
@@ -163,7 +166,7 @@ const DigitalMarketing = () => {
                   <CardHeader className="text-center">
                     <CardTitle className="text-2xl">{pkg.name}</CardTitle>
                     <div className="mb-4">
-                      <span className="text-4xl font-bold gradient-text">{pkg.price}</span>
+                      <span className="text-4xl font-bold gradient-text">{pkg.investment}</span>
                       <span className="text-muted-foreground">{pkg.period}</span>
                     </div>
                     <CardDescription>{pkg.description}</CardDescription>
@@ -180,6 +183,7 @@ const DigitalMarketing = () => {
                     <Button 
                       className={pkg.popular ? "btn-gradient w-full" : "w-full"} 
                       variant={pkg.popular ? "default" : "outline"}
+                      onClick={scrollToContact}
                     >
                       Get Started
                     </Button>
@@ -199,7 +203,7 @@ const DigitalMarketing = () => {
             <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
               Let's create a custom digital marketing strategy that drives real results for your business.
             </p>
-            <Button className="btn-gradient text-lg px-8 py-4">
+            <Button className="btn-gradient text-lg px-8 py-4" onClick={scrollToContact}>
               Schedule Free Consultation
               <ArrowRight size={20} className="ml-2" />
             </Button>

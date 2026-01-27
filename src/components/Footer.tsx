@@ -1,5 +1,3 @@
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import { Separator } from "@/components/ui/separator";
 import { 
   Facebook, 
@@ -9,8 +7,7 @@ import {
   Youtube,
   Mail,
   Phone,
-  MapPin,
-  ArrowRight
+  MapPin
 } from "lucide-react";
 import { Link } from "react-router-dom";
 
@@ -54,29 +51,7 @@ const Footer = () => {
 
   return (
     <footer className="bg-muted/20 border-t border-border/50">
-      {/* Newsletter Section */}
       <div className="container mx-auto px-4 py-16">
-        <div className="card-3d p-8 mb-16">
-          <div className="text-center max-w-2xl mx-auto">
-            <h3 className="text-3xl font-bold mb-4">
-              Stay Updated with <span className="gradient-text">Latest Trends</span>
-            </h3>
-            <p className="text-muted-foreground mb-6">
-              Get weekly insights, tips, and exclusive content delivered to your inbox.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
-              <Input 
-                placeholder="Enter your email" 
-                className="bg-background/50 border-border/50 flex-1"
-              />
-              <Button className="btn-gradient">
-                Subscribe
-                <ArrowRight size={16} className="ml-2" />
-              </Button>
-            </div>
-          </div>
-        </div>
-
         {/* Main Footer Content */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 mb-12">
           {/* Company Info */}
