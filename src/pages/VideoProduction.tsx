@@ -5,10 +5,10 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Badge } from "@/components/ui/badge";
 import { 
   Video, 
-  Camera, 
-  Monitor, 
-  Mic, 
-  Film, 
+  FileVideo, 
+  Layers, 
+  RefreshCw, 
+  Target,
   Play,
   ArrowRight,
   CheckCircle,
@@ -18,80 +18,82 @@ import {
 const VideoProduction = () => {
   const features = [
     {
-      icon: Camera,
-      title: "Commercial Videos",
-      description: "Professional promotional videos that showcase your brand"
+      icon: Target,
+      title: "Result Driven Content Planning",
+      description: "Strategic planning focused on achieving your business goals"
     },
     {
-      icon: Monitor,
-      title: "Social Content",
-      description: "Engaging short-form content optimized for social platforms"
+      icon: FileVideo,
+      title: "4 Video Edits",
+      description: "Professional editing for up to 4 promotional videos"
     },
     {
-      icon: Film,
-      title: "Animation & Motion Graphics",
-      description: "Eye-catching animations that explain complex concepts"
+      icon: Layers,
+      title: "2 Variation of Ratio",
+      description: "Videos optimized for different platform requirements"
     },
     {
-      icon: Mic,
-      title: "Live Streaming",
-      description: "Professional live streaming setup and production"
+      icon: RefreshCw,
+      title: "3 Non-Paid Revisions",
+      description: "Three rounds of revisions included at no extra cost"
     }
   ];
 
   const packages = [
     {
       name: "Starter",
-      price: "$2,000",
+      investment: "$200",
       period: "",
       description: "Perfect for small business videos",
       features: [
-        "1 professional video (up to 2 minutes)",
-        "Basic editing & color correction",
-        "2 revision rounds",
-        "HD delivery",
-        "Commercial usage rights"
+        "Result driven content planning",
+        "4 video edits",
+        "2 variation of ratio",
+        "3 non-paid revisions",
+        "HD delivery"
       ]
     },
     {
       name: "Professional",
-      price: "$5,000",
+      investment: "$500",
       period: "",
       description: "Comprehensive video production",
       features: [
         "Everything in Starter",
-        "3 professional videos",
+        "8 video edits",
+        "3 variation of ratio",
         "Advanced editing & effects",
-        "Motion graphics & animations",
-        "Sound design & music",
+        "Motion graphics",
         "4K delivery",
-        "Social media cuts",
         "Unlimited revisions"
       ],
       popular: true
     },
     {
       name: "Enterprise",
-      price: "Custom",
+      investment: "Custom",
       period: "",
       description: "Full-scale video campaigns",
       features: [
         "Unlimited videos",
-        "Multi-camera production",
-        "Drone footage",
-        "Professional actors/voice-over",
-        "Custom animations",
-        "Live streaming setup",
-        "Dedicated video team",
-        "Rush delivery options"
+        "All ratio variations",
+        "Professional animations",
+        "Custom graphics",
+        "Rush delivery options",
+        "Dedicated video editor",
+        "Priority support"
       ]
     }
   ];
 
   const videoTypes = [
-    "Product Demos", "Brand Stories", "Testimonials", "Explainer Videos", 
-    "Social Media Ads", "Training Videos", "Event Coverage", "Documentaries"
+    "Product Demos", "Social Media Ads", "Promotional Videos", "Explainer Videos", 
+    "Testimonials", "Brand Stories", "Event Coverage", "Tutorial Videos"
   ];
+
+  const scrollToContact = () => {
+    window.location.href = '/#contact';
+  };
 
   return (
     <div className="min-h-screen">
@@ -103,16 +105,16 @@ const VideoProduction = () => {
             <div className="max-w-4xl mx-auto text-center">
               <Badge className="mb-6 bg-gradient-primary text-primary-foreground">
                 <Video size={16} className="mr-2" />
-                Video Production
+                Promotional Video Content
               </Badge>
               <h1 className="text-5xl md:text-7xl font-bold mb-6">
                 Videos That
                 <span className="gradient-text"> Captivate</span> and Convert
               </h1>
               <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
-                Professional video production that captures attention, tells your story, and drives engagement across all platforms.
+                Professional promotional video content that captures attention, tells your story, and drives engagement across all platforms.
               </p>
-              <Button className="btn-gradient text-lg px-8 py-4">
+              <Button className="btn-gradient text-lg px-8 py-4" onClick={scrollToContact}>
                 Start Your Video Project
                 <Play size={20} className="ml-2" />
               </Button>
@@ -125,10 +127,10 @@ const VideoProduction = () => {
           <div className="container mx-auto px-4">
             <div className="text-center mb-16">
               <h2 className="text-4xl font-bold mb-6">
-                What We <span className="gradient-text">Create</span>
+                What's <span className="gradient-text">Included</span>
               </h2>
               <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-                From concept to final cut, we handle every aspect of video production
+                Everything you need for professional promotional videos
               </p>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -184,9 +186,9 @@ const VideoProduction = () => {
             <div className="grid grid-cols-1 md:grid-cols-4 gap-8 max-w-6xl mx-auto">
               {[
                 { step: "01", title: "Discovery", desc: "Understanding your goals and vision" },
-                { step: "02", title: "Pre-Production", desc: "Script, storyboard, and planning" },
-                { step: "03", title: "Production", desc: "Professional filming and recording" },
-                { step: "04", title: "Post-Production", desc: "Editing, effects, and delivery" }
+                { step: "02", title: "Planning", desc: "Content strategy and storyboarding" },
+                { step: "03", title: "Production", desc: "Professional editing and effects" },
+                { step: "04", title: "Delivery", desc: "Final review and multi-format delivery" }
               ].map((item, index) => (
                 <Card key={index} className="card-3d text-center">
                   <CardHeader>
@@ -227,7 +229,8 @@ const VideoProduction = () => {
                   <CardHeader className="text-center">
                     <CardTitle className="text-2xl">{pkg.name}</CardTitle>
                     <div className="mb-4">
-                      <span className="text-4xl font-bold gradient-text">{pkg.price}</span>
+                      <span className="text-sm text-muted-foreground">Investment: </span>
+                      <span className="text-4xl font-bold gradient-text">{pkg.investment}</span>
                       <span className="text-muted-foreground">{pkg.period}</span>
                     </div>
                     <CardDescription>{pkg.description}</CardDescription>
@@ -244,6 +247,7 @@ const VideoProduction = () => {
                     <Button 
                       className={pkg.popular ? "btn-gradient w-full" : "w-full"} 
                       variant={pkg.popular ? "default" : "outline"}
+                      onClick={scrollToContact}
                     >
                       Get Started
                     </Button>
@@ -263,7 +267,7 @@ const VideoProduction = () => {
             <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
               Let's bring your vision to life with professional video production that gets results.
             </p>
-            <Button className="btn-gradient text-lg px-8 py-4">
+            <Button className="btn-gradient text-lg px-8 py-4" onClick={scrollToContact}>
               Get Video Quote
               <ArrowRight size={20} className="ml-2" />
             </Button>

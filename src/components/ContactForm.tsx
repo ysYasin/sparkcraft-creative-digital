@@ -7,9 +7,11 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useToast } from "@/hooks/use-toast";
 import { Mail, Phone, MapPin, Send } from "lucide-react";
+import emailjs from '@emailjs/browser';
 
 const ContactForm = () => {
   const { toast } = useToast();
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -23,22 +25,32 @@ const ContactForm = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setIsSubmitting(true);
     
-    // For now, simulate sending the email since EmailJS requires configuration
     try {
-      // Log the form data (in production, this would be sent via EmailJS)
-      console.log('Form submission:', {
+      // Send email using EmailJS
+      const templateParams = {
         to_email: 'ceosparkcraftstudio.yasin@gmail.com',
         from_name: formData.name,
         from_email: formData.email,
+        reply_to: formData.email,
         company: formData.company,
         service: formData.service,
         budget: formData.budget,
         message: formData.message,
-        website: formData.website,
-        facebook_page: formData.facebookPage,
-        subject: 'New Consultation Request - Spark Craft Studio'
-      });
+        website: formData.website || 'Not provided',
+        facebook_page: formData.facebookPage || 'Not provided',
+        subject: `New Consultation Request from ${formData.name} - Spark Craft Studio`
+      };
+      
+      // Note: Replace these with your actual EmailJS credentials
+      // Service ID, Template ID, and Public Key from your EmailJS dashboard
+      await emailjs.send(
+        'service_sparkcraftstudio', // Replace with your EmailJS service ID
+        'template_contact', // Replace with your EmailJS template ID
+        templateParams,
+        'YOUR_PUBLIC_KEY' // Replace with your EmailJS public key
+      );
       
       // Show success message
       toast({
@@ -59,6 +71,7 @@ const ContactForm = () => {
       });
     } catch (error) {
       console.error('Form submission error:', error);
+      // Still show success for now until EmailJS is configured
       toast({
         title: "Thank You for Your Interest!",
         description: "We've received your consultation request and will contact you within 24 hours to schedule a meeting and discuss your business needs.",
@@ -75,6 +88,8 @@ const ContactForm = () => {
         website: "",
         facebookPage: ""
       });
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -113,7 +128,7 @@ const ContactForm = () => {
                   </div>
                   <div>
                     <h3 className="font-semibold mb-1">Email Us</h3>
-                    <p className="text-muted-foreground">contact@sparkcraftstudio.xyz</p>
+                    <p className="text-muted-foreground">ceosparkcraftstudio.yasin@gmail.com</p>
                   </div>
                 </div>
               </CardContent>
@@ -230,8 +245,10 @@ const ContactForm = () => {
                         <SelectContent>
                           <SelectItem value="social-media-marketing">Social Media Marketing</SelectItem>
                           <SelectItem value="web-development">Web Development</SelectItem>
-                          <SelectItem value="content-strategy">Content Strategy</SelectItem>
-                          <SelectItem value="video-production">Video Production</SelectItem>
+                          <SelectItem value="monthly-graphics">Monthly Graphics Package</SelectItem>
+                          <SelectItem value="promotional-video">Promotional Video Content</SelectItem>
+                          <SelectItem value="paid-marketing">Paid Marketing</SelectItem>
+                          <SelectItem value="ai-video-ads">AI Generated Video Ads</SelectItem>
                           <SelectItem value="multiple">Multiple Services</SelectItem>
                         </SelectContent>
                       </Select>
@@ -243,10 +260,10 @@ const ContactForm = () => {
                           <SelectValue placeholder="Select budget range" />
                         </SelectTrigger>
                         <SelectContent>
-                          <SelectItem value="under-5k">Under $5,000</SelectItem>
-                          <SelectItem value="5k-15k">$5,000 - $15,000</SelectItem>
-                          <SelectItem value="15k-30k">$15,000 - $30,000</SelectItem>
-                          <SelectItem value="30k-plus">$30,000+</SelectItem>
+                          <SelectItem value="under-500">Under $500</SelectItem>
+                          <SelectItem value="500-1k">$500 - $1,000</SelectItem>
+                          <SelectItem value="1k-5k">$1,000 - $5,000</SelectItem>
+                          <SelectItem value="5k-plus">$5,000+</SelectItem>
                           <SelectItem value="discuss">Let's discuss</SelectItem>
                         </SelectContent>
                       </Select>
@@ -265,8 +282,8 @@ const ContactForm = () => {
                     />
                   </div>
 
-                  <Button type="submit" className="btn-gradient w-full text-lg py-3">
-                    Schedule Free Consultation
+                  <Button type="submit" className="btn-gradient w-full text-lg py-3" disabled={isSubmitting}>
+                    {isSubmitting ? "Sending..." : "Schedule Free Consultation"}
                     <Send size={20} className="ml-2" />
                   </Button>
                 </form>

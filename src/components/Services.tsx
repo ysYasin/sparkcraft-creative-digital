@@ -5,10 +5,11 @@ import ServiceLeadForm from "@/components/ServiceLeadForm";
 import { 
   Palette, 
   BarChart3, 
-  Megaphone, 
   Globe, 
-  Video, 
-  Smartphone,
+  Video,
+  Image,
+  Target,
+  Sparkles,
   ArrowRight,
   CheckCircle
 } from "lucide-react";
@@ -21,28 +22,48 @@ const Services = () => {
       title: "Social Media Marketing",
       description: "Comprehensive social media strategies that build brand awareness and drive engagement across all platforms.",
       features: ["Content Creation", "Community Management", "Paid Advertising", "Analytics & Reporting"],
-      slug: "digital-marketing"
+      investment: "$350",
+      slug: "social-media-marketing"
     },
     {
       icon: Globe,
       title: "Web Development",
       description: "Modern, responsive websites that convert visitors into customers and grow your business.",
       features: ["Custom Development", "E-commerce", "CMS Integration", "Mobile Responsive"],
+      investment: "Starts from $250",
       slug: "web-development"
     },
     {
-      icon: Megaphone,
-      title: "Content Strategy",
-      description: "Engaging content that tells your story and builds meaningful connections with your audience.",
-      features: ["Content Planning", "Copywriting", "Blog Strategy", "Email Campaigns"],
-      slug: "content-strategy"
+      icon: Image,
+      title: "Monthly Graphics Package",
+      description: "Professional graphic design services to elevate your brand's visual presence across all platforms.",
+      features: ["8 Graphic design", "Strategy building", "Result-driven", "Every content in 3 ratios"],
+      investment: "Starts from $150",
+      slug: "monthly-graphics-package"
     },
     {
       icon: Video,
-      title: "Video Production",
+      title: "Promotional Video Content",
       description: "Professional video content that captures attention and drives engagement across all platforms.",
-      features: ["Commercial Videos", "Social Content", "Animation", "Live Streaming"],
-      slug: "video-production"
+      features: ["Result driven content planning", "4 video edits", "2 variation of ratio", "3 non-paid revisions"],
+      investment: "$200",
+      slug: "promotional-video-content"
+    },
+    {
+      icon: Target,
+      title: "Paid Marketing",
+      description: "Strategic paid advertising campaigns across multiple platforms to maximize your ROI and reach.",
+      features: ["Meta Marketing", "Google Ads", "TikTok Ads", "LinkedIn", "Pinterest / Snapchat"],
+      investment: "$250 for 1 (+$100 each additional)",
+      slug: "paid-marketing"
+    },
+    {
+      icon: Sparkles,
+      title: "AI Generated Video Ads",
+      description: "Cutting-edge AI-powered video advertisements that deliver results with efficiency and creativity.",
+      features: ["Result driven content planning", "Video edits", "1 variation of ratio", "3 non-paid revisions"],
+      investment: "Contact for pricing",
+      slug: "ai-video-ads"
     }
   ];
 
@@ -80,6 +101,10 @@ const Services = () => {
                 </CardDescription>
               </CardHeader>
               <CardContent>
+                <div className="mb-4">
+                  <span className="text-sm text-muted-foreground">Investment: </span>
+                  <span className="text-lg font-bold gradient-text">{service.investment}</span>
+                </div>
                 <ul className="space-y-2 mb-6">
                   {service.features.map((feature, idx) => (
                     <li key={idx} className="flex items-center text-sm text-muted-foreground">

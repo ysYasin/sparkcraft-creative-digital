@@ -1,35 +1,14 @@
-import React, { useState } from "react";
+import React from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
+import { Card } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
-import { Star, Download, Users, BookOpen, TrendingUp, Target, Lightbulb, BarChart, Clock, FileText } from "lucide-react";
-import { useToast } from "@/hooks/use-toast";
+import { BookOpen, Users, TrendingUp, Target, Lightbulb, BarChart, Clock, FileText } from "lucide-react";
 
 const Ebook = () => {
-  const [email, setEmail] = useState("");
-  const [name, setName] = useState("");
-  const { toast } = useToast();
-
-  const handleDownload = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!email || !name) {
-      toast({
-        title: "Error",
-        description: "Please fill in all fields",
-        variant: "destructive"
-      });
-      return;
-    }
-    toast({
-      title: "Success",
-      description: "Download link sent to your email! Check your inbox."
-    });
-    setEmail("");
-    setName("");
+  const scrollToContact = () => {
+    window.location.href = '/#contact';
   };
 
   return (
@@ -227,14 +206,14 @@ const Ebook = () => {
           <p className="text-xl mb-8 max-w-2xl mx-auto opacity-90">
             Join our VIP list and be the first to get this comprehensive marketing guide at a special pre-launch discount.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
-            <Button size="lg" variant="secondary" className="flex-1">
-              Join VIP List
-            </Button>
-            <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-emerald-500">
-              Get Notified
-            </Button>
-          </div>
+          <Button 
+            size="lg" 
+            variant="secondary" 
+            className="flex-1"
+            onClick={scrollToContact}
+          >
+            Join VIP List
+          </Button>
           <p className="text-sm mt-4 opacity-75">
             VIP members get 50% off the launch price + exclusive bonuses
           </p>

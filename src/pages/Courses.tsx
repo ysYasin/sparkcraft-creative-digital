@@ -1,11 +1,10 @@
 import React from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
 import { Badge } from "@/components/ui/badge";
-import { BookOpen, Users, Clock, Star, Zap, Target, TrendingUp, Award } from "lucide-react";
+import { Users, Target, TrendingUp, Zap, Award, Star, BookOpen } from "lucide-react";
 
 const Courses = () => {
   return (
@@ -148,26 +147,6 @@ const Courses = () => {
               <h3 className="text-xl font-semibold mb-3">Lifetime Access</h3>
               <p className="text-muted-foreground">Get lifetime access to course materials and future updates.</p>
             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className="py-20">
-        <div className="container mx-auto px-4 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-6 bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
-            Be the First to Know When We Launch!
-          </h2>
-          <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
-            Join our waiting list and get exclusive early access to our courses plus special launch discounts.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center max-w-md mx-auto">
-            <Button size="lg" className="text-lg px-8 bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600">
-              Join Waiting List
-            </Button>
-            <Button size="lg" variant="outline" className="text-lg px-8 border-purple-500 text-purple-600 hover:bg-purple-50">
-              Get Notified
-            </Button>
           </div>
         </div>
       </section>
