@@ -43,14 +43,12 @@ const ContactForm = () => {
         subject: `New Consultation Request from ${formData.name} - Spark Craft Studio`
       };
       
-      // Note: Replace these with your actual EmailJS credentials
-      // Service ID, Template ID, and Public Key from your EmailJS dashboard
-      await emailjs.send(
-        'service_sparkcraftstudio', // Replace with your EmailJS service ID
-        'template_contact', // Replace with your EmailJS template ID
-        templateParams,
-        'YOUR_PUBLIC_KEY' // Replace with your EmailJS public key
-      );
+      // EmailJS credentials - these are public keys safe for client-side use
+      const serviceId = 'service_hcuftbl';
+      const templateId = 'template_1cmi1ks';
+      const publicKey = 'HS9_D_6u2FHqpPSaZ';
+      
+      await emailjs.send(serviceId, templateId, templateParams, publicKey);
       
       // Show success message
       toast({
