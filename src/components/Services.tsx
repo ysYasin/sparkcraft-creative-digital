@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import ServiceLeadForm from "@/components/ServiceLeadForm";
@@ -13,9 +14,10 @@ import {
   ArrowRight,
   CheckCircle
 } from "lucide-react";
-
 const Services = () => {
   const [selectedService, setSelectedService] = useState<string | null>(null);
+  const navigate = useNavigate();
+  
   const services = [
     {
       icon: BarChart3,
@@ -114,13 +116,23 @@ const Services = () => {
                   ))}
                 </ul>
                 <div className="flex items-center justify-center">
-                  <Button 
-                    className="w-full btn-gradient"
-                    onClick={() => setSelectedService(service.title)}
-                  >
-                    Get Quote
-                    <ArrowRight size={16} className="ml-1" />
-                  </Button>
+                  {service.slug === "web-development" ? (
+                    <Button 
+                      className="w-full btn-gradient"
+                      onClick={() => navigate('/web-development/packages')}
+                    >
+                      See Packages
+                      <ArrowRight size={16} className="ml-1" />
+                    </Button>
+                  ) : (
+                    <Button 
+                      className="w-full btn-gradient"
+                      onClick={() => setSelectedService(service.title)}
+                    >
+                      Get Quote
+                      <ArrowRight size={16} className="ml-1" />
+                    </Button>
+                  )}
                 </div>
               </CardContent>
             </Card>
